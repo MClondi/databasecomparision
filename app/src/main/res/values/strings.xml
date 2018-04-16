@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Database Comparison</string>
+    <string name="homeBottomMenuRealmPerformance">Realm</string>
+    <string name="homeBottomMenuObjectBoxPerformance">ObjectBox</string>
+    <string name="homeBottomMenuRoomPerformance">Room</string>
+
+    <string name="performanceMenuStart">Start</string>
+    <string name="performanceLoading">Performance test is running</string>
+    <string name="performanceResult">Result</string>
+    <string name="performanceOk">OK</string>
+    <string name="performanceSave">Save: %d ms</string>
+    <string name="performanceRead">Read: %d ms</string>
+    <string name="performanceDelete">Delete: %d ms</string>
+</resources>

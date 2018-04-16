@@ -1,0 +1,93 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "beb84af57762b82e853cb1c5ebe2efee",
+    "entities": [
+      {
+        "tableName": "performance",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `data1` TEXT NOT NULL, `data2` TEXT NOT NULL, `data3` TEXT NOT NULL, `data4` TEXT NOT NULL, `data5` TEXT NOT NULL, `data6` TEXT NOT NULL, `data7` TEXT NOT NULL, `data8` TEXT NOT NULL, `data9` TEXT NOT NULL, `data10` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data1",
+            "columnName": "data1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data2",
+            "columnName": "data2",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data3",
+            "columnName": "data3",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data4",
+            "columnName": "data4",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data5",
+            "columnName": "data5",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data6",
+            "columnName": "data6",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data7",
+            "columnName": "data7",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data8",
+            "columnName": "data8",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data9",
+            "columnName": "data9",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data5.data10",
+            "columnName": "data10",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"beb84af57762b82e853cb1c5ebe2efee\")"
+    ]
+  }
+}

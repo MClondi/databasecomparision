@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_realm_performance"
+        android:enabled="true"
+        android:icon="@drawable/ic_speedometer"
+        android:title="@string/homeBottomMenuRealmPerformance"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_object_box_performance"
+        android:enabled="true"
+        android:icon="@drawable/ic_speedometer"
+        android:title="@string/homeBottomMenuObjectBoxPerformance"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_room_performance"
+        android:enabled="true"
+        android:icon="@drawable/ic_speedometer"
+        android:title="@string/homeBottomMenuRoomPerformance"
+        app:showAsAction="ifRoom"/>
+
+</menu>

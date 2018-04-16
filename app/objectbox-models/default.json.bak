@@ -1,0 +1,153 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8356208442758891398",
+      "lastPropertyId": "13:1325674076710570463",
+      "name": "Planet",
+      "properties": [
+        {
+          "id": "1:248595583704641997",
+          "name": "name"
+        },
+        {
+          "id": "2:7175557960040998889",
+          "name": "rotation_period"
+        },
+        {
+          "id": "3:6168943360108814662",
+          "name": "orbital_period"
+        },
+        {
+          "id": "4:4458938366968818232",
+          "name": "diameter"
+        },
+        {
+          "id": "5:768532717818370005",
+          "name": "climate"
+        },
+        {
+          "id": "6:8066981280705728128",
+          "name": "gravity"
+        },
+        {
+          "id": "7:2194541825193264866",
+          "name": "terrain"
+        },
+        {
+          "id": "8:3983181497046046393",
+          "name": "surface_water"
+        },
+        {
+          "id": "9:125010338579720918",
+          "name": "population"
+        },
+        {
+          "id": "10:4315741757470136275",
+          "name": "id"
+        },
+        {
+          "id": "11:3335640596994371817",
+          "name": "url"
+        },
+        {
+          "id": "12:9077462674296946368",
+          "name": "created"
+        },
+        {
+          "id": "13:1325674076710570463",
+          "name": "edited"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1869054415011787663",
+      "lastPropertyId": "7:6945390893462023542",
+      "name": "ObjectBoxPerformanceDataInner",
+      "properties": [
+        {
+          "id": "1:2179243311627716149",
+          "name": "id"
+        },
+        {
+          "id": "2:9176746677964462839",
+          "name": "data5"
+        },
+        {
+          "id": "3:5487601808702666341",
+          "name": "data6"
+        },
+        {
+          "id": "4:5664223593964678372",
+          "name": "data7"
+        },
+        {
+          "id": "5:1692558229416120779",
+          "name": "data8"
+        },
+        {
+          "id": "6:1101095718253112119",
+          "name": "data9"
+        },
+        {
+          "id": "7:6945390893462023542",
+          "name": "data10"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3868956091155950770",
+      "lastPropertyId": "8:1580495822966331201",
+      "name": "ObjectBoxPerformanceDataOuter",
+      "properties": [
+        {
+          "id": "1:465641235202041367",
+          "name": "id"
+        },
+        {
+          "id": "2:9203279370640318540",
+          "name": "data1"
+        },
+        {
+          "id": "3:2710785772721831659",
+          "name": "data2"
+        },
+        {
+          "id": "4:3219719077111160018",
+          "name": "data3"
+        },
+        {
+          "id": "5:6567768748369235345",
+          "name": "data4"
+        },
+        {
+          "id": "8:1580495822966331201",
+          "indexId": "3:6169269783947275834",
+          "name": "data5Id"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:3868956091155950770",
+  "lastIndexId": "3:6169269783947275834",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    4977163327767499719,
+    8882305565607318521
+  ],
+  "retiredPropertyUids": [
+    5340221850976074526,
+    6816219133110638704
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

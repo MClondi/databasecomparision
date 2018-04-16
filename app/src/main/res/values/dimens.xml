@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="dimen1unit">8dp</dimen>
+    <dimen name="listBorderMargin">72dp</dimen>
+    <dimen name="listBorderWidth">1dp</dimen>
+</resources>
