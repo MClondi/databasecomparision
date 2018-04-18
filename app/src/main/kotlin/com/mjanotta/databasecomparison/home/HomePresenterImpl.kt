@@ -9,6 +9,7 @@ class HomePresenterImpl(view: HomeView, val router: HomeRouter) : HomePresenter<
     override var realmPerformanceSelected = false
     override var objectBoxPerformanceSelected = false
     override var roomPerformanceSelected = false
+    override var sqlitePerformanceSelected = false
 
     override fun bindView() {
 
@@ -17,6 +18,7 @@ class HomePresenterImpl(view: HomeView, val router: HomeRouter) : HomePresenter<
                     realmPerformanceSelected = true
                     objectBoxPerformanceSelected = false
                     realmPerformanceSelected = false
+                    sqlitePerformanceSelected = false
                 }
                 .subscribe { router.openRealmPerformance() }
                 .addTo(disposables)
@@ -25,6 +27,7 @@ class HomePresenterImpl(view: HomeView, val router: HomeRouter) : HomePresenter<
                     realmPerformanceSelected = false
                     objectBoxPerformanceSelected = true
                     realmPerformanceSelected = false
+                    sqlitePerformanceSelected = false
                 }
                 .subscribe { router.openObjectBoxPerformance() }
                 .addTo(disposables)
@@ -33,8 +36,18 @@ class HomePresenterImpl(view: HomeView, val router: HomeRouter) : HomePresenter<
                     realmPerformanceSelected = false
                     objectBoxPerformanceSelected = false
                     realmPerformanceSelected = true
+                    sqlitePerformanceSelected = false
                 }
                 .subscribe { router.openRoomPerformance() }
+                .addTo(disposables)
+        view.sqlitePerformanceClicks
+                .doOnNext {
+                    realmPerformanceSelected = false
+                    objectBoxPerformanceSelected = false
+                    realmPerformanceSelected = false
+                    sqlitePerformanceSelected = true
+                }
+                .subscribe { router.openSqlitePerformance() }
                 .addTo(disposables)
     }
 
@@ -43,18 +56,21 @@ class HomePresenterImpl(view: HomeView, val router: HomeRouter) : HomePresenter<
             realmPerformanceSelected = it.realmPerformanceSelected
             objectBoxPerformanceSelected = it.objectBoxPerformanceSelected
             roomPerformanceSelected = it.roomPerformanceSelected
+            sqlitePerformanceSelected = it.sqlitePerformanceSelected
         }
     }
 
     override fun saveState(): State? = State(
             realmPerformanceSelected,
             objectBoxPerformanceSelected,
-            roomPerformanceSelected)
+            roomPerformanceSelected,
+            sqlitePerformanceSelected)
 
     @Parcel(Parcel.Serialization.BEAN)
     class State @ParcelConstructor constructor(
             val realmPerformanceSelected: Boolean,
             val objectBoxPerformanceSelected: Boolean,
-            val roomPerformanceSelected: Boolean
+            val roomPerformanceSelected: Boolean,
+            val sqlitePerformanceSelected: Boolean
     )
 }

@@ -9,6 +9,7 @@ interface HomeView : BaseView {
     val realmPerformanceClicks: Observable<Any>
     val objectBoxPerformanceClicks: Observable<Any>
     val roomPerformanceClicks: Observable<Any>
+    val sqlitePerformanceClicks: Observable<Any>
 }
 
 abstract class HomePresenter<S>(view: HomeView) : BasePresenter<HomeView, S>(view) {
@@ -16,6 +17,7 @@ abstract class HomePresenter<S>(view: HomeView) : BasePresenter<HomeView, S>(vie
     abstract var realmPerformanceSelected: Boolean
     abstract var objectBoxPerformanceSelected: Boolean
     abstract var roomPerformanceSelected: Boolean
+    abstract var sqlitePerformanceSelected: Boolean
 }
 
 interface HomeRouter {
@@ -26,4 +28,6 @@ interface HomeRouter {
     fun openObjectBoxPerformance()
 
     fun openRoomPerformance()
+
+    fun openSqlitePerformance()
 }

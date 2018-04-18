@@ -24,4 +24,11 @@
         android:title="@string/homeBottomMenuRoomPerformance"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/action_sqlite_performance"
+        android:enabled="true"
+        android:icon="@drawable/ic_speedometer"
+        android:title="@string/homeBottomMenuSqlitePerformance"
+        app:showAsAction="ifRoom"/>
+
 </menu>

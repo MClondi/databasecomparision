@@ -6,6 +6,7 @@ import com.mjanotta.databasecomparison.R
 import com.mjanotta.databasecomparison.objectbox.ObjectBoxPerformanceFragment
 import com.mjanotta.databasecomparison.realm.RealmPerformanceFragment
 import com.mjanotta.databasecomparison.room.RoomPerformanceFragment
+import com.mjanotta.databasecomparison.sqlite.SqlitePerformanceFragment
 
 class HomeRouterImpl(private val fragmentManager: FragmentManager) : HomeRouter {
 
@@ -13,6 +14,7 @@ class HomeRouterImpl(private val fragmentManager: FragmentManager) : HomeRouter 
         const val TAG_REALM_PERFORMANCE_FRAGMENT = "RealmPerformanceFragment"
         const val TAG_OBJECT_BOX_PERFORMANCE_FRAGMENT = "ObjectBoxPerformanceFragment"
         const val TAG_ROOM_PERFORMANCE_FRAGMENT = "RoomPerformanceFragment"
+        const val TAG_SQLITE_PERFORMANCE_FRAGMENT = "SqlitePerformanceFragment"
     }
 
     override fun openRealmPerformance() {
@@ -25,6 +27,10 @@ class HomeRouterImpl(private val fragmentManager: FragmentManager) : HomeRouter 
 
     override fun openRoomPerformance() {
         replaceFragment(TAG_ROOM_PERFORMANCE_FRAGMENT) { RoomPerformanceFragment() }
+    }
+
+    override fun openSqlitePerformance() {
+        replaceFragment(TAG_SQLITE_PERFORMANCE_FRAGMENT) { SqlitePerformanceFragment() }
     }
 
     private fun replaceFragment(tag: String, fragment: () -> Fragment) {

@@ -15,6 +15,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.lazy
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mjanotta.databasecomparison.appModule
+import com.mjanotta.databasecomparison.sqlite.sqlitePerformanceModule
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -29,6 +30,7 @@ class DatabaseComparisonApplication : Application(), KodeinAware {
         import(realmPerformanceModule)
         import(objectBoxPerformanceModule)
         import(roomPerformanceModule)
+        import(sqlitePerformanceModule(this@DatabaseComparisonApplication))
     }
 
     val realmConfig: RealmConfiguration by kodein.lazy.instance()

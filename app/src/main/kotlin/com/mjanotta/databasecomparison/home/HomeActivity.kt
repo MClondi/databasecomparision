@@ -37,6 +37,13 @@ class HomeActivity : BaseActivity<HomePresenter<*>>(), HomeView {
                 .cast(Any::class.java)
     }
 
+    override val sqlitePerformanceClicks: Observable<Any> by lazy {
+        navigationClicks
+                .filter { it.itemId == R.id.action_sqlite_performance}
+                .cast(Any::class.java)
+    }
+
+
     override fun setView(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
@@ -46,6 +53,7 @@ class HomeActivity : BaseActivity<HomePresenter<*>>(), HomeView {
     private fun initBottomNavigation() = when {
         presenter.realmPerformanceSelected -> bottomNavigation.selectedItemId = R.id.action_realm_performance
         presenter.objectBoxPerformanceSelected -> bottomNavigation.selectedItemId = R.id.action_object_box_performance
+        presenter.sqlitePerformanceSelected -> bottomNavigation.selectedItemId = R.id.action_sqlite_performance
         else -> bottomNavigation.selectedItemId = R.id.action_room_performance
     }
 

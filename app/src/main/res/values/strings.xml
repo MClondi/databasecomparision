@@ -3,6 +3,7 @@
     <string name="homeBottomMenuRealmPerformance">Realm</string>
     <string name="homeBottomMenuObjectBoxPerformance">ObjectBox</string>
     <string name="homeBottomMenuRoomPerformance">Room</string>
+    <string name="homeBottomMenuSqlitePerformance">SQLite</string>
 
     <string name="performanceMenuStart">Start</string>
     <string name="performanceLoading">Performance test is running</string>
