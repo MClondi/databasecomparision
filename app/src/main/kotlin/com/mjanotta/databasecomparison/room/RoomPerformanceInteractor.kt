@@ -14,7 +14,7 @@ class RoomPerformanceInteractor(
         private val items: Long
 ) : PerformanceInteractor<RoomPerformanceDataOuter> {
 
-    private var data: List<RoomPerformanceDataOuter> = createData({ RoomPerformanceDataOuter(0, "", "", "", "", RoomPerformanceDataInner("", "", "", "", "", "")) }, { RoomPerformanceDataInner("", "", "", "", "", "") })
+    private var data: List<RoomPerformanceDataOuter> = createData()
 
 
     override fun saveData(): Completable {
@@ -35,15 +35,15 @@ class RoomPerformanceInteractor(
 
     override fun reset(): Completable {
         return Completable.fromAction {
-            data = createData({ RoomPerformanceDataOuter(0, "", "", "", "", RoomPerformanceDataInner("", "", "", "", "", "")) }, { RoomPerformanceDataInner("", "", "", "", "", "") })
+            data = createData()
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    private fun createData(outerData: () -> RoomPerformanceDataOuter, innerData: () -> RoomPerformanceDataInner): List<RoomPerformanceDataOuter> {
+    private fun createData(): List<RoomPerformanceDataOuter> {
         return Single.fromCallable {
-            val dataOuter = outerData()
-            val dataInner = innerData()
+            val dataOuter = RoomPerformanceDataOuter(0, "", "", "", "", RoomPerformanceDataInner("", "", "", "", "", ""))
+            val dataInner = RoomPerformanceDataInner("", "", "", "", "", "")
 
             dataInner.data5 = "5"
             dataInner.data6 = "6"

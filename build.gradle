@@ -1,5 +1,4 @@
 apply from: 'dependencies.gradle'
-apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
     apply from: 'dependencies.gradle'
@@ -9,8 +8,6 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$toolsVersion"
-        classpath "com.github.ben-manes:gradle-versions-plugin:$versionsVersion"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$dexcountVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "io.objectbox:objectbox-gradle-plugin:$objectBoxVersion"
         classpath "io.realm:realm-gradle-plugin:$realmVersion"

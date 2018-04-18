@@ -14,7 +14,7 @@ class ObjectBoxPerformanceInteractor(
         private val items: Long
 ) : PerformanceInteractor<ObjectBoxPerformanceDataOuter> {
 
-    private var data: List<ObjectBoxPerformanceDataOuter> = createData({ ObjectBoxPerformanceDataOuter() }, { ObjectBoxPerformanceDataInner() })
+    private var data: List<ObjectBoxPerformanceDataOuter> = createData()
 
     override fun saveData(): Completable {
         return repository.save(data)
@@ -34,15 +34,15 @@ class ObjectBoxPerformanceInteractor(
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun reset(): Completable {
-        return Completable.fromAction { data = createData({ ObjectBoxPerformanceDataOuter() }, { ObjectBoxPerformanceDataInner() }) }
+        return Completable.fromAction { data = createData() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    private fun createData(outerData: () -> ObjectBoxPerformanceDataOuter, innerData: () -> ObjectBoxPerformanceDataInner): List<ObjectBoxPerformanceDataOuter> {
+    private fun createData(): List<ObjectBoxPerformanceDataOuter> {
         return Single.fromCallable {
-            val dataOuter = outerData()
-            val dataInner = innerData()
+            val dataOuter = ObjectBoxPerformanceDataOuter()
+            val dataInner = ObjectBoxPerformanceDataInner()
 
             dataInner.data5 = "5"
             dataInner.data6 = "6"

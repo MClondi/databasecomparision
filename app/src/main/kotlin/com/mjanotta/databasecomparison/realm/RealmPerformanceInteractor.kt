@@ -16,7 +16,7 @@ class RealmPerformanceInteractor(
         private val items: Long
 ) : PerformanceInteractor<RealmPerformanceDataOuter> {
 
-    private val data: List<RealmPerformanceDataOuter> = createData({ RealmPerformanceDataOuter() }, { RealmPerformanceDataInner() })
+    private val data: List<RealmPerformanceDataOuter> = createData()
 
     override fun saveData(): Completable {
         return repository.save(data)
@@ -37,10 +37,10 @@ class RealmPerformanceInteractor(
 
     override fun reset(): Completable = Completable.complete()
 
-    private fun createData(outerData: () -> RealmPerformanceDataOuter, innerData: () -> RealmPerformanceDataInner): List<RealmPerformanceDataOuter> {
+    private fun createData(): List<RealmPerformanceDataOuter> {
         return Single.fromCallable {
-            val dataOuter = outerData()
-            val dataInner = innerData()
+            val dataOuter = RealmPerformanceDataOuter()
+            val dataInner = RealmPerformanceDataInner()
 
             dataInner.data5 = "5"
             dataInner.data6 = "6"
