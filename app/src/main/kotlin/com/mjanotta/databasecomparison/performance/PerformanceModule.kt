@@ -7,7 +7,7 @@ import com.github.salomonbrys.kodein.scopedSingleton
 import com.github.salomonbrys.kodein.with
 
 val performanceModule = Kodein.Module {
-    constant("items") with 300000L
+    constant("items") with 5L
     constant("repeat") with 10L
 
     bind<PerformanceRouter>() with scopedSingleton(androidFragmentScope) { PerformanceRouterImpl(it) }
