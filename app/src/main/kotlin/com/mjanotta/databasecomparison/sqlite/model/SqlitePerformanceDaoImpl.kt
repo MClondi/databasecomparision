@@ -13,7 +13,7 @@ import io.reactivex.Flowable
 class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, DatabaseContract.DATABASE_NAME, null, 1), SqlitePerformanceDao {
 
     private val CREATE_TABLE_INNER = "CREATE TABLE ${DatabaseContract.InnerData.TABLE_NAME} (" +
-            "${BaseColumns._ID} AUTOINCREMENT INTEGER PRIMARY KEY," +
+            "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
             "${DatabaseContract.InnerData.COLUMN_5} TEXT," +
             "${DatabaseContract.InnerData.COLUMN_6} TEXT," +
             "${DatabaseContract.InnerData.COLUMN_7} TEXT," +
@@ -23,16 +23,16 @@ class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, Dat
             "${DatabaseContract.InnerData.COLUMN_QUERY_PARAM} TEXT)"
 
     private val CREATE_TABLE_OUTER = "CREATE TABLE ${DatabaseContract.OuterData.TABLE_NAME} (" +
-            "${BaseColumns._ID} AUTOINCREMENT INTEGER PRIMARY KEY," +
+            "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
             "${DatabaseContract.OuterData.COLUMN_1} TEXT," +
             "${DatabaseContract.OuterData.COLUMN_2} TEXT," +
             "${DatabaseContract.OuterData.COLUMN_3} TEXT," +
             "${DatabaseContract.OuterData.COLUMN_4} TEXT," +
             "${DatabaseContract.OuterData.COLUMN_5} INTEGER," +
-            "FOREIGN KEY(${DatabaseContract.OuterData.COLUMN_5}) REFERENCES ${DatabaseContract.InnerData.TABLE_NAME}(${BaseColumns._ID})"
+            "FOREIGN KEY(${DatabaseContract.OuterData.COLUMN_5}) REFERENCES ${DatabaseContract.InnerData.TABLE_NAME}(${BaseColumns._ID}))"
 
-    private val DELETE_TABLES = "DROP TABLE IF EXISTS ${DatabaseContract.InnerData.TABLE_NAME};" +
-            "DROP TABLE IF EXISTS ${DatabaseContract.OuterData.TABLE_NAME}"
+    private val DELETE_TABLE_INNER = "DROP TABLE IF EXISTS ${DatabaseContract.InnerData.TABLE_NAME}"
+    private val DELETE_TABLE_OUTER = "DROP TABLE IF EXISTS ${DatabaseContract.OuterData.TABLE_NAME}"
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE_INNER)
@@ -40,19 +40,20 @@ class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, Dat
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL(DELETE_TABLES)
+        db.execSQL(DELETE_TABLE_INNER)
+        db.execSQL(DELETE_TABLE_OUTER)
         onCreate(db)
     }
 
     override fun findAll(): Flowable<List<SqlitePerformanceDataOuter>> {
         return Flowable.fromCallable {
             val list = mutableListOf<SqlitePerformanceDataOuter>()
-            val cursor = readableDatabase.rawQuery("SELECT * FORM ${DatabaseContract.OuterData.TABLE_NAME}", null)
+            val cursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.OuterData.TABLE_NAME}", null)
 
             if (cursor.moveToFirst()) {
                 do {
 
-                    val innerCursor = readableDatabase.rawQuery("SELECT * FORM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${BaseColumns._ID} EQUALS ${cursor.getInt(5)}", null)
+                    val innerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${BaseColumns._ID} LIKE ${cursor.getInt(5)}", null)
                     var innerObject: SqlitePerformanceDataInner? = null
                     if (innerCursor.moveToFirst()) {
                         innerObject = SqlitePerformanceDataInner(
@@ -113,11 +114,11 @@ class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, Dat
     override fun findOuterDataByInnerDataQueryParam(value: String): Flowable<List<SqlitePerformanceDataOuter>> {
         return Flowable.fromCallable {
             val list = mutableListOf<SqlitePerformanceDataOuter>()
-            val innerCursor = readableDatabase.rawQuery("SELECT * FORM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${DatabaseContract.InnerData.COLUMN_QUERY_PARAM} EQUALS $value", null)
+            val innerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${DatabaseContract.InnerData.COLUMN_QUERY_PARAM} EQUALS $value", null)
 
             if (innerCursor.moveToFirst()) {
                 do {
-                    val outerCursor = readableDatabase.rawQuery("SELECT * FORM ${DatabaseContract.OuterData.TABLE_NAME} WHERE ${DatabaseContract.OuterData.COLUMN_5} EQUALS ${innerCursor.getColumnIndex("")}", null)
+                    val outerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.OuterData.TABLE_NAME} WHERE ${DatabaseContract.OuterData.COLUMN_5} EQUALS ${innerCursor.getColumnIndex("")}", null)
 
 
                     val innerObject = SqlitePerformanceDataInner(
@@ -149,7 +150,8 @@ class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, Dat
     }
 
     override fun deleteAll() {
-        this.readableDatabase.execSQL(DELETE_TABLES)
+        writableDatabase.execSQL("DELETE FROM ${DatabaseContract.InnerData.TABLE_NAME}")
+        writableDatabase.execSQL("DELETE FROM ${DatabaseContract.OuterData.TABLE_NAME}")
      }
 
 }
