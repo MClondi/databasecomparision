@@ -114,30 +114,33 @@ class SqlitePerformanceDaoImpl(context: Context) : SQLiteOpenHelper(context, Dat
     override fun findOuterDataByInnerDataQueryParam(value: String): Flowable<List<SqlitePerformanceDataOuter>> {
         return Flowable.fromCallable {
             val list = mutableListOf<SqlitePerformanceDataOuter>()
-            val innerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${DatabaseContract.InnerData.COLUMN_QUERY_PARAM} EQUALS $value", null)
+            val innerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.InnerData.TABLE_NAME} WHERE ${DatabaseContract.InnerData.COLUMN_QUERY_PARAM}='$value'", null)
 
             if (innerCursor.moveToFirst()) {
                 do {
-                    val outerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.OuterData.TABLE_NAME} WHERE ${DatabaseContract.OuterData.COLUMN_5} EQUALS ${innerCursor.getColumnIndex("")}", null)
+                    val outerCursor = readableDatabase.rawQuery("SELECT * FROM ${DatabaseContract.OuterData.TABLE_NAME} WHERE ${DatabaseContract.OuterData.COLUMN_5} LIKE ${innerCursor.getColumnIndex(BaseColumns._ID)}", null)
 
+                    if (outerCursor.moveToFirst()) {
 
-                    val innerObject = SqlitePerformanceDataInner(
-                            innerCursor.getString(0),
-                            innerCursor.getString(1),
-                            innerCursor.getString(2),
-                            innerCursor.getString(3),
-                            innerCursor.getString(4),
-                            innerCursor.getString(5),
-                            innerCursor.getString(6)
-                    )
+                        val innerObject = SqlitePerformanceDataInner(
+                                innerCursor.getString(0),
+                                innerCursor.getString(1),
+                                innerCursor.getString(2),
+                                innerCursor.getString(3),
+                                innerCursor.getString(4),
+                                innerCursor.getString(5),
+                                innerCursor.getString(6)
+                        )
 
-                    list.add(SqlitePerformanceDataOuter(
-                            outerCursor.getColumnIndexOrThrow(BaseColumns._ID),
-                            outerCursor.getString(1),
-                            outerCursor.getString(2),
-                            outerCursor.getString(3),
-                            outerCursor.getString(4),
-                            innerObject))
+                        list.add(SqlitePerformanceDataOuter(
+                                outerCursor.getColumnIndexOrThrow(BaseColumns._ID),
+                                outerCursor.getString(1),
+                                outerCursor.getString(2),
+                                outerCursor.getString(3),
+                                outerCursor.getString(4),
+                                innerObject))
+
+                    }
 
                     outerCursor.close()
 
