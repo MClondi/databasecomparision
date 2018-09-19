@@ -4,66 +4,6 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:8356208442758891398",
-      "lastPropertyId": "13:1325674076710570463",
-      "name": "Planet",
-      "properties": [
-        {
-          "id": "1:248595583704641997",
-          "name": "name"
-        },
-        {
-          "id": "2:7175557960040998889",
-          "name": "rotation_period"
-        },
-        {
-          "id": "3:6168943360108814662",
-          "name": "orbital_period"
-        },
-        {
-          "id": "4:4458938366968818232",
-          "name": "diameter"
-        },
-        {
-          "id": "5:768532717818370005",
-          "name": "climate"
-        },
-        {
-          "id": "6:8066981280705728128",
-          "name": "gravity"
-        },
-        {
-          "id": "7:2194541825193264866",
-          "name": "terrain"
-        },
-        {
-          "id": "8:3983181497046046393",
-          "name": "surface_water"
-        },
-        {
-          "id": "9:125010338579720918",
-          "name": "population"
-        },
-        {
-          "id": "10:4315741757470136275",
-          "name": "id"
-        },
-        {
-          "id": "11:3335640596994371817",
-          "name": "url"
-        },
-        {
-          "id": "12:9077462674296946368",
-          "name": "created"
-        },
-        {
-          "id": "13:1325674076710570463",
-          "name": "edited"
-        }
-      ],
-      "relations": []
-    },
-    {
       "id": "2:1869054415011787663",
       "lastPropertyId": "7:6945390893462023542",
       "name": "ObjectBoxPerformanceDataInner",
@@ -139,14 +79,29 @@
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    8356208442758891398
+  ],
   "retiredIndexUids": [
     4977163327767499719,
     8882305565607318521
   ],
   "retiredPropertyUids": [
     5340221850976074526,
-    6816219133110638704
+    6816219133110638704,
+    248595583704641997,
+    7175557960040998889,
+    6168943360108814662,
+    4458938366968818232,
+    768532717818370005,
+    8066981280705728128,
+    2194541825193264866,
+    3983181497046046393,
+    125010338579720918,
+    4315741757470136275,
+    3335640596994371817,
+    9077462674296946368,
+    1325674076710570463
   ],
   "retiredRelationUids": [],
   "version": 1

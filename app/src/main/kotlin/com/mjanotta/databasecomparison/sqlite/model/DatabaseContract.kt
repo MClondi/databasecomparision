@@ -23,6 +23,7 @@ object DatabaseContract {
         const val COLUMN_8 = "COL8"
         const val COLUMN_9 = "COL9"
         const val COLUMN_10 = "COL10"
+        const val COLUMN_QUERY_PARAM = "COLQP"
     }
 
 }

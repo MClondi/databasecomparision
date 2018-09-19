@@ -49,6 +49,8 @@ class PerformanceResultDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         view.createTime.text = getString(R.string.performanceSave, performanceResult.saveTime)
         view.readTime.text = getString(R.string.performanceRead, performanceResult.readTime)
+        view.queryNearTime.text = getString(R.string.performanceQueryNear, performanceResult.queryNearTime)
+        view.queryFarTime.text = getString(R.string.performanceQueryFar, performanceResult.queryFarTime)
         view.deleteTime.text = getString(R.string.performanceDelete, performanceResult.deleteTime)
     }
 }

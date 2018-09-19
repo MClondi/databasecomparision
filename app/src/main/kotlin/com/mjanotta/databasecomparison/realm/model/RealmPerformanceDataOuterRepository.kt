@@ -14,4 +14,6 @@ interface RealmPerformanceDataOuterRepository {
     fun save(entities: Iterable<RealmPerformanceDataOuter>): Completable
 
     fun deleteAll(realm: Realm): Completable
+
+    fun findOuterDataByInnerDataQueryParam(realm: Realm, value: String): Observable<RealmResults<RealmPerformanceDataOuter>>
 }

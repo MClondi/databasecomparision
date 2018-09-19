@@ -1,6 +1,7 @@
 package com.mjanotta.databasecomparison.realm
 
 import com.mjanotta.databasecomparison.performance.PerformanceInteractor
+import com.mjanotta.databasecomparison.performance.PerformanceQuery
 import com.mjanotta.databasecomparison.realm.entity.RealmPerformanceDataInner
 import com.mjanotta.databasecomparison.realm.entity.RealmPerformanceDataOuter
 import com.mjanotta.databasecomparison.realm.model.RealmPerformanceDataOuterRepository
@@ -35,9 +36,17 @@ class RealmPerformanceInteractor(
         return repository.deleteAll(realm).observeOn(AndroidSchedulers.mainThread())
     }
 
+    override fun queryData(value: String): Single<List<RealmPerformanceDataOuter>> {
+        return repository.findOuterDataByInnerDataQueryParam(realm, value)
+                .firstOrError()
+                .map { it as List<RealmPerformanceDataOuter> }
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun reset(): Completable = Completable.complete()
 
     private fun createData(): List<RealmPerformanceDataOuter> {
+        var currentItem = 0L
         return Single.fromCallable {
             val dataOuter = RealmPerformanceDataOuter()
             val dataInner = RealmPerformanceDataInner()
@@ -48,6 +57,11 @@ class RealmPerformanceInteractor(
             dataInner.data8 = "8"
             dataInner.data9 = "9"
             dataInner.data10 = "10"
+            dataInner.queryParam = when (++currentItem) {
+                1L ->  PerformanceQuery.NEAR
+                (items - 1) ->  PerformanceQuery.FAR
+                else ->  "random"
+            }
 
             dataOuter.data1 = "1"
             dataOuter.data2 = "2"

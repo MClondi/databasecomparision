@@ -12,4 +12,6 @@
     <string name="performanceSave">Save: %d ms</string>
     <string name="performanceRead">Read: %d ms</string>
     <string name="performanceDelete">Delete: %d ms</string>
+    <string name="performanceQueryNear">Query near: %d ms</string>
+    <string name="performanceQueryFar">Query far: %d ms</string>
 </resources>

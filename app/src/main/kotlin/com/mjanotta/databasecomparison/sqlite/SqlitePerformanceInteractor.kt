@@ -1,6 +1,7 @@
 package com.mjanotta.databasecomparison.sqlite
 
 import com.mjanotta.databasecomparison.performance.PerformanceInteractor
+import com.mjanotta.databasecomparison.performance.PerformanceQuery
 import com.mjanotta.databasecomparison.sqlite.entity.SqlitePerformanceDataInner
 import com.mjanotta.databasecomparison.sqlite.entity.SqlitePerformanceDataOuter
 import com.mjanotta.databasecomparison.sqlite.model.SqlitePerformanceDao
@@ -24,7 +25,8 @@ class SqlitePerformanceInteractor(
                 .observeOn(AndroidSchedulers.mainThread()) }
 
     override fun readData(): Single<List<SqlitePerformanceDataOuter>> {
-        return dao.findAll().firstOrError()
+        return dao.findAll()
+                .firstOrError()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
@@ -32,6 +34,13 @@ class SqlitePerformanceInteractor(
     override fun deleteData(): Completable = Completable.fromAction { dao.deleteAll() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+
+    override fun queryData(value: String): Single<List<SqlitePerformanceDataOuter>> {
+        return dao.findOuterDataByInnerDataQueryParam(value)
+                .firstOrError()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 
     override fun reset(): Completable {
         return Completable.fromAction {
@@ -41,22 +50,17 @@ class SqlitePerformanceInteractor(
     }
 
     private fun createData(): List<SqlitePerformanceDataOuter> {
+        var currentItem = 0L
         return Single.fromCallable {
-            val dataOuter = SqlitePerformanceDataOuter(0, "", "", "", "", SqlitePerformanceDataInner("", "", "", "", "", ""))
-            val dataInner = SqlitePerformanceDataInner("", "", "", "", "", "")
 
-            dataInner.data5 = "5"
-            dataInner.data6 = "6"
-            dataInner.data7 = "7"
-            dataInner.data8 = "8"
-            dataInner.data9 = "9"
-            dataInner.data10 = "10"
+            val queryParam = when (++currentItem) {
+                1L ->  PerformanceQuery.NEAR
+                (items - 1) ->  PerformanceQuery.FAR
+                else ->  "random"
+            }
 
-            dataOuter.data1 = "1"
-            dataOuter.data2 = "2"
-            dataOuter.data3 = "3"
-            dataOuter.data4 = "4"
-            dataOuter.data5 = dataInner
+            val dataInner = SqlitePerformanceDataInner("5", "6", "7", "8", "9", "10", queryParam)
+            val dataOuter = SqlitePerformanceDataOuter(0, "1", "2", "3", "4", dataInner)
 
             return@fromCallable dataOuter
         }

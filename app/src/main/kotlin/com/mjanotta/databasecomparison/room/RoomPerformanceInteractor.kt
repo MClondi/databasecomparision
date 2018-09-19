@@ -1,6 +1,7 @@
 package com.mjanotta.databasecomparison.room
 
 import com.mjanotta.databasecomparison.performance.PerformanceInteractor
+import com.mjanotta.databasecomparison.performance.PerformanceQuery
 import com.mjanotta.databasecomparison.room.entity.RoomPerformanceDataInner
 import com.mjanotta.databasecomparison.room.entity.RoomPerformanceDataOuter
 import com.mjanotta.databasecomparison.room.model.RoomPerformanceDao
@@ -33,6 +34,13 @@ class RoomPerformanceInteractor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
+    override fun queryData(value: String): Single<List<RoomPerformanceDataOuter>> {
+        return dao.findOuterDataByInnerDataQueryParam(value)
+                .firstOrError()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun reset(): Completable {
         return Completable.fromAction {
             data = createData()
@@ -41,22 +49,17 @@ class RoomPerformanceInteractor(
     }
 
     private fun createData(): List<RoomPerformanceDataOuter> {
+        var currentItem = 0L
         return Single.fromCallable {
-            val dataOuter = RoomPerformanceDataOuter(0, "", "", "", "", RoomPerformanceDataInner("", "", "", "", "", ""))
-            val dataInner = RoomPerformanceDataInner("", "", "", "", "", "")
 
-            dataInner.data5 = "5"
-            dataInner.data6 = "6"
-            dataInner.data7 = "7"
-            dataInner.data8 = "8"
-            dataInner.data9 = "9"
-            dataInner.data10 = "10"
+            val queryParam = when (++currentItem) {
+                1L ->  PerformanceQuery.NEAR
+                (items - 1) ->  PerformanceQuery.FAR
+                else ->  "random"
+            }
 
-            dataOuter.data1 = "1"
-            dataOuter.data2 = "2"
-            dataOuter.data3 = "3"
-            dataOuter.data4 = "4"
-            dataOuter.data5 = dataInner
+            val dataInner = RoomPerformanceDataInner("5", "6", "7", "8", "9", "10", queryParam)
+            val dataOuter = RoomPerformanceDataOuter(0, "1", "2", "3", "4", dataInner)
 
             return@fromCallable dataOuter
         }

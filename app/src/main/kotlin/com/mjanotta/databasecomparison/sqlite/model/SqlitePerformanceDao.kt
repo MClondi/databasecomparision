@@ -10,4 +10,6 @@ interface SqlitePerformanceDao {
     fun save(entities: List<SqlitePerformanceDataOuter>)
 
     fun deleteAll()
+
+    fun findOuterDataByInnerDataQueryParam(value: String): Flowable<List<SqlitePerformanceDataOuter>>
 }

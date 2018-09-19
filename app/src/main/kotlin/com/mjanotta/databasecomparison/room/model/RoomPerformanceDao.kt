@@ -18,4 +18,7 @@ interface RoomPerformanceDao {
 
     @Query("DELETE FROM performance")
     fun deleteAll()
+
+    @Query("SELECT * FROM performance WHERE queryParam LIKE :value")
+    fun findOuterDataByInnerDataQueryParam(value: String): Flowable<List<RoomPerformanceDataOuter>>
 }

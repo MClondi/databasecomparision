@@ -8,5 +8,6 @@ open class RealmPerformanceDataInner(
         var data7: String = "",
         var data8: String = "",
         var data9: String = "",
-        var data10: String = ""
+        var data10: String = "",
+        var queryParam: String = ""
 ) : RealmObject()

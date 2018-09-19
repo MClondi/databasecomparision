@@ -11,4 +11,6 @@ interface ObjectBoxPerformanceDataOuterRepository {
     fun save(entities: List<ObjectBoxPerformanceDataOuter>): Completable
 
     fun deleteAll(): Completable
+
+    fun findOuterDataByInnerDataQueryParam(value: String): Observable<List<ObjectBoxPerformanceDataOuter>>
 }

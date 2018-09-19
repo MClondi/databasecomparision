@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "beb84af57762b82e853cb1c5ebe2efee",
+    "identityHash": "2f6ef5862394025e807e5abbfde9e791",
     "entities": [
       {
         "tableName": "performance",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `data1` TEXT NOT NULL, `data2` TEXT NOT NULL, `data3` TEXT NOT NULL, `data4` TEXT NOT NULL, `data5` TEXT NOT NULL, `data6` TEXT NOT NULL, `data7` TEXT NOT NULL, `data8` TEXT NOT NULL, `data9` TEXT NOT NULL, `data10` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `data1` TEXT NOT NULL, `data2` TEXT NOT NULL, `data3` TEXT NOT NULL, `data4` TEXT NOT NULL, `data5` TEXT NOT NULL, `data6` TEXT NOT NULL, `data7` TEXT NOT NULL, `data8` TEXT NOT NULL, `data9` TEXT NOT NULL, `data10` TEXT NOT NULL, `queryParam` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -73,6 +73,12 @@
             "columnName": "data10",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "data5.queryParam",
+            "columnName": "queryParam",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -87,7 +93,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"beb84af57762b82e853cb1c5ebe2efee\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2f6ef5862394025e807e5abbfde9e791\")"
     ]
   }
 }

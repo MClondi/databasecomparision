@@ -22,6 +22,12 @@ class RealmPerformanceDataOuterRepositoryImpl(val rxFactory: RxFactory) : RealmP
         }
     }
 
+    override fun findOuterDataByInnerDataQueryParam(realm: Realm, value: String): Observable<RealmResults<RealmPerformanceDataOuter>> {
+        return rxFactory.from(realm, realm.where(RealmPerformanceDataOuter::class.java).equalTo("data5.queryParam", value).findAllAsync())
+                .filter { it.isLoaded }
+
+    }
+
     override fun deleteAll(realm: Realm): Completable {
         return Completable.fromAction {
             realm.executeTransaction {

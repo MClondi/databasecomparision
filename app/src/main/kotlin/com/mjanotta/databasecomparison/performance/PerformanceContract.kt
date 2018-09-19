@@ -26,6 +26,8 @@ interface PerformanceInteractor<T> {
 
     fun deleteData(): Completable
 
+    fun queryData(value: String): Single<List<T>>
+
     fun reset(): Completable
 }
 
@@ -37,4 +39,9 @@ abstract class PerformancePresenter<S, in T>(view: PerformanceView<T>) : BasePre
 interface PerformanceRouter {
 
     fun showPerformanceResult(performanceResult: PerformanceResult)
+}
+
+object PerformanceQuery {
+    val NEAR = "start"
+    val FAR = "end"
 }

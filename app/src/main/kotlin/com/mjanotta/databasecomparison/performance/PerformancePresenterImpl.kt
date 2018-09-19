@@ -22,11 +22,13 @@ open class PerformancePresenterImpl<in T>(
     }
 
     private fun startTest() {
-        val performanceResult = PerformanceResult(0, 0, 0)
+        val performanceResult = PerformanceResult(0, 0, 0, 0, 0)
         val stopwatch = Stopwatch()
         view.showProgress()
         savePerformance(stopwatch, performanceResult)
                 .andThen(readPerformance(stopwatch, performanceResult))
+                .andThen(queryNearPerformance(stopwatch, performanceResult))
+                .andThen(queryFarPerformance(stopwatch, performanceResult))
                 .andThen(interactor.deleteData())
                 .andThen(deletePerformance(stopwatch, performanceResult))
                 .andThen(interactor.reset())
@@ -62,6 +64,28 @@ open class PerformancePresenterImpl<in T>(
                 .toList()
                 .map { it.average() }
                 .doOnSuccess { performanceResult.readTime = it.toLong() }
+                .toCompletable()
+    }
+
+    private fun queryNearPerformance(stopwatch: Stopwatch, performanceResult: PerformanceResult): Completable {
+        return Completable.fromAction { stopwatch.start() }
+                .andThen(interactor.queryData(PerformanceQuery.NEAR))
+                .map { stopwatch.stop(TimeUnit.MILLISECONDS) }
+                .repeat(repeat)
+                .toList()
+                .map { it.average() }
+                .doOnSuccess { performanceResult.queryNearTime = it.toLong() }
+                .toCompletable()
+    }
+
+    private fun queryFarPerformance(stopwatch: Stopwatch, performanceResult: PerformanceResult): Completable {
+        return Completable.fromAction { stopwatch.start() }
+                .andThen(interactor.queryData(PerformanceQuery.FAR))
+                .map { stopwatch.stop(TimeUnit.MILLISECONDS) }
+                .repeat(repeat)
+                .toList()
+                .map { it.average() }
+                .doOnSuccess { performanceResult.queryFarTime = it.toLong() }
                 .toCompletable()
     }
 

@@ -27,7 +27,7 @@
         tools:text="Time 2"/>
 
     <TextView
-        android:id="@+id/deleteTime"
+        android:id="@+id/queryNearTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -35,5 +35,25 @@
         android:lines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         tools:text="Time 3"/>
+
+    <TextView
+        android:id="@+id/queryFarTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:text="Time 4"/>
+
+    <TextView
+        android:id="@+id/deleteTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:text="Time 5"/>
 
 </LinearLayout>

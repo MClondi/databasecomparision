@@ -19,6 +19,12 @@ class ObjectBoxPerformanceDataOuterRepositoryImpl(
         performanceBox.put(entities)
     }
 
+    override fun findOuterDataByInnerDataQueryParam(value: String): Observable<List<ObjectBoxPerformanceDataOuter>> {
+        return RxQuery.observable(performanceBox.query().filter { outer ->
+            outer.data5.target.queryParam == value
+        }.build())
+    }
+
     override fun deleteAll(): Completable = Completable.fromAction {
         performanceBox.removeAll()
         innerPerformanceBox.removeAll()
